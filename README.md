@@ -49,14 +49,69 @@ CYBERSECURITY WEB/
 └── .nojekyll              # GitHub Pages config
 ```
 
-## Local Development
+## Run Locally with XAMPP
+
+The full version of the site (login, dashboard, admin panel, and database-backed content) runs on **PHP + MySQL** via XAMPP.
+
+### Prerequisites
+
+- [XAMPP](https://www.apachefriends.org/) installed (Apache + MySQL + PHP)
+- The project folder placed in your XAMPP `htdocs` directory
+
+### Setup Steps
+
+1. **Copy the project into `htdocs`**
+   - Example: `C:\xampp\htdocs\CYBERSECURITY WEB\`
+
+2. **Start XAMPP services**
+   - Open the XAMPP Control Panel
+   - Start **Apache**
+   - Start **MySQL**
+
+3. **Create the database**
+   - Open [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
+   - Go to **Import**
+   - Choose `database/cybersecurity_learn_db.sql`
+   - Click **Go** to import the schema and sample data
+
+4. **Configure the app**
+   - Copy `config/config.example.php` to `config/config.php` (if it does not exist yet)
+   - Set `BASE_URL` to match your folder name under `htdocs`:
+     ```php
+     define('BASE_URL', '/CYBERSECURITY WEB');
+     ```
+   - Default XAMPP database settings (usually no changes needed):
+     - Host: `localhost`
+     - Database: `cybersecurity_learn_db`
+     - User: `root`
+     - Password: *(empty)*
+
+5. **Open the site in your browser**
+   - [http://localhost/CYBERSECURITY%20WEB/index.php](http://localhost/CYBERSECURITY%20WEB/index.php)
+
+### Demo Accounts
+
+| Role  | Username    | Password   |
+|-------|-------------|------------|
+| Admin | `admin`     | `admin123` |
+| User  | `demo_user` | `user123`  |
+
+### Troubleshooting
+
+- **Blank page or 500 error** — check that Apache and MySQL are running in XAMPP
+- **Database connection failed** — confirm `config/config.php` credentials and that the database was imported
+- **Broken links or missing styles** — verify `BASE_URL` in `config/config.php` matches your `htdocs` folder name exactly (including spaces)
+
+## Static Version (No Server)
+
+The `.html` files in the project root are a static version for GitHub Pages or quick preview without a database.
 
 1. Clone the repository
 2. Open any `.html` file in VS Code
 3. Use the **Live Server** extension to preview (recommended)
 4. Or open `index.html` directly in a browser
 
-No database or server setup required.
+No database or server setup required. Quiz progress is saved in the browser's `localStorage` only.
 
 ## Deploy to GitHub Pages
 
@@ -69,7 +124,8 @@ No database or server setup required.
 
 ## Quiz Progress
 
-Quiz results are saved in your browser's `localStorage` — no account or server needed. Progress stays on your device only.
+- **XAMPP / PHP version:** Logged-in users have quiz results saved to the database and shown on the Dashboard.
+- **Static HTML version:** Quiz results are saved in the browser's `localStorage` only — no account or server needed.
 
 ## For Academic Submission
 
