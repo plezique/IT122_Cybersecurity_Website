@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CyberSafe Learn — Interactive quizzes and password strength checker.">
+    <title>Quiz &amp; Tools | CyberSafe Learn</title>
+    <script>
+        (function () {
+            var key = 'cybersafe-theme';
+            var saved = localStorage.getItem(key);
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-page="quiz">
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <div class="container">
+                <span class="data-tag">Quiz &amp; Tools</span>
+                <h1 class="mt-2">Quiz &amp; Tools</h1>
+                <p>Test your security awareness and check password strength — interactive and educational.</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="quiz-tabs" role="tablist">
+                    <button class="quiz-tab active" data-tab="phishing-quiz" role="tab">Phishing Quiz</button>
+                    <button class="quiz-tab" data-tab="awareness-quiz" role="tab">Awareness Quiz</button>
+                    <button class="quiz-tab" data-tab="password-tool" role="tab">Password Checker</button>
+                </div>
+
+                <div id="phishing-quiz" class="quiz-panel active" role="tabpanel">
+                    <div class="quiz-container">
+                        <p class="text-muted mb-3">Can you spot a phishing attempt? Answer each question and see the explanation immediately.</p>
+                        <div class="quiz-engine" id="phishing-quiz-engine" data-quiz-type="phishing">
+                            <div class="quiz-progress"><div class="quiz-progress-bar"></div></div>
+                            <div class="quiz-question-area">
+                                <div class="question-card">
+                                    <h3 class="quiz-question-text"></h3>
+                                    <ul class="quiz-options"></ul>
+                                    <div class="explanation-box" style="display:none;"></div>
+                                </div>
+                                <button class="btn btn-primary quiz-next-btn" style="display:none;">Next Question</button>
+                            </div>
+                            <div class="quiz-result" style="display:none;">
+                                <div class="score-circle"><span class="score-value"></span></div>
+                                <h3>Quiz Complete!</h3>
+                                <p class="result-message"></p>
+                                <button type="button" class="btn btn-outline mt-2 quiz-retake-btn">Try Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="awareness-quiz" class="quiz-panel" role="tabpanel">
+                    <div class="quiz-container">
+                        <p class="text-muted mb-3">A broader security awareness quiz covering passwords, malware, networks, and more.</p>
+                        <div class="quiz-engine" id="awareness-quiz-engine" data-quiz-type="awareness">
+                            <div class="quiz-progress"><div class="quiz-progress-bar"></div></div>
+                            <div class="quiz-question-area">
+                                <div class="question-card">
+                                    <h3 class="quiz-question-text"></h3>
+                                    <ul class="quiz-options"></ul>
+                                    <div class="explanation-box" style="display:none;"></div>
+                                </div>
+                                <button class="btn btn-primary quiz-next-btn" style="display:none;">Next Question</button>
+                            </div>
+                            <div class="quiz-result" style="display:none;">
+                                <div class="score-circle"><span class="score-value"></span></div>
+                                <div class="awareness-badge"></div>
+                                <h3>Quiz Complete!</h3>
+                                <p class="result-message"></p>
+                                <button type="button" class="btn btn-outline mt-2 quiz-retake-btn">Try Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="password-tool" class="quiz-panel" role="tabpanel">
+                    <div class="password-checker">
+                        <h2 class="section-title text-center">Password Strength Checker</h2>
+                        <p class="text-muted text-center mb-3">Type a password below to see how strong it is. Nothing is sent to any server.</p>
+                        <div class="question-card">
+                            <div class="password-input-group">
+                                <label for="password-input">Test a password</label>
+                                <div class="password-field">
+                                    <input type="password" id="password-input" placeholder="Enter a password to check..." autocomplete="off">
+                                    <button type="button" class="toggle-password" aria-label="Show password" data-target="password-input"></button>
+                                </div>
+                            </div>
+                            <div class="strength-meter">
+                                <div class="strength-meter-fill" id="strength-meter-fill"></div>
+                            </div>
+                            <p class="strength-label" id="strength-label">Enter a password to check</p>
+                            <ul class="strength-tips" id="strength-criteria">
+                                <li data-criterion="length" class="unmet">At least 12 characters</li>
+                                <li data-criterion="upper" class="unmet">Contains uppercase letter</li>
+                                <li data-criterion="lower" class="unmet">Contains lowercase letter</li>
+                                <li data-criterion="number" class="unmet">Contains a number</li>
+                                <li data-criterion="special" class="unmet">Contains special character</li>
+                                <li data-criterion="unique" class="unmet">No repeated character sequences</li>
+                            </ul>
+                            <p class="privacy-note" id="privacy-note">This tool runs entirely in your browser. Your password is never transmitted or stored.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="assets/js/icons.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/quiz.js"></script>
+    <script src="assets/js/pages.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/password-checker.js"></script>
+    <script src="assets/js/password-toggle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const note = document.getElementById('privacy-note');
+            if (note) note.innerHTML = getIcon('lock') + ' ' + note.textContent;
+        });
+    </script>
+</body>
+</html>

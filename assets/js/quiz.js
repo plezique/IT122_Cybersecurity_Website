@@ -1,10 +1,25 @@
 /**
  * Interactive Quiz Engine — phishing and awareness quizzes.
- * Questions are passed from PHP as a JSON data attribute.
+ * Questions are passed as a JSON data attribute or loaded from data.js.
  */
 
+const QUIZ_RESULTS_KEY = 'cybersafe-quiz-results';
+
+function saveQuizResultLocal(result) {
+    try {
+        const existing = JSON.parse(localStorage.getItem(QUIZ_RESULTS_KEY) || '[]');
+        existing.unshift({ ...result, date_taken: new Date().toISOString() });
+        localStorage.setItem(QUIZ_RESULTS_KEY, JSON.stringify(existing.slice(0, 20)));
+    } catch {
+        // Ignore storage errors in private browsing mode.
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.quiz-engine').forEach(initQuiz);
+    document.querySelectorAll('.quiz-engine').forEach((container) => {
+        if (!container.dataset.questions) return;
+        initQuiz(container);
+    });
 });
 
 function initQuiz(container) {
@@ -195,6 +210,14 @@ function initQuiz(container) {
                 body: JSON.stringify(payload),
             }).catch(() => {});
         }
+
+        saveQuizResultLocal({
+            quiz_type: quizType,
+            score: state.score,
+            total: questions.length,
+            awareness_level: level || null,
+            module_id: moduleId,
+        });
     }
 
     nextBtn.addEventListener('click', () => {

@@ -1,152 +1,82 @@
 # CyberSafe Learn
 
-A responsive, educational cybersecurity awareness website built with **HTML, CSS, JavaScript, PHP, and MySQL**. Designed for students and everyday internet users to learn practical online safety skills through interactive modules, quizzes, and tools.
+A responsive, educational cybersecurity awareness website built with **HTML, CSS, JavaScript, and Bootstrap**. Designed for students and everyday internet users to learn practical online safety skills through interactive modules, quizzes, and tools.
+
+**Live site:** Deployed on GitHub Pages (see Setup below).
 
 ## Features
 
 - **8 Learning Modules** — Passwords, phishing, malware, Wi-Fi safety, and more
 - **Interactive Quizzes** — Phishing identification quiz and security awareness scored quiz
 - **Password Strength Checker** — Client-side tool (no data sent to server)
-- **Tip of the Day** — Dynamically pulled from the database
+- **Tip of the Day** — Randomly selected from featured tips
 - **Quick Tips Cheat Sheet** — Printable/PDF-friendly tips by category
 - **Resources & Glossary** — Curated tools and term definitions
-- **User Accounts** — Registration, login, and personalized quiz progress dashboard
-- **Admin Panel** — Manage modules, tips, and quiz questions with basic analytics
+- **Dark / Light Theme** — Toggle with preference saved in browser
 
-## Security Practices Demonstrated
+## Technologies Used
 
-This project practices what it teaches:
-
-- Passwords hashed with PHP `password_hash()` / `password_verify()`
-- All database queries use **PDO prepared statements** (SQL injection prevention)
-- Output escaped with `htmlspecialchars()` (XSS prevention)
-- Password checker runs entirely in the browser (privacy by design)
-
-## Requirements
-
-- [XAMPP](https://www.apachefriends.org/) (Apache + MySQL + PHP 8.0+)
-- A modern web browser
-
-## Setup Instructions
-
-### 1. Install XAMPP
-
-Download and install XAMPP from [apachefriends.org](https://www.apachefriends.org/). Start **Apache** and **MySQL** from the XAMPP Control Panel.
-
-### 2. Place Project Files
-
-Copy this entire project folder into your XAMPP `htdocs` directory:
-
-```
-C:\xampp\htdocs\CYBERSECURITY WEB\
-```
-
-Or keep it in your current location and create a shortcut/symlink in `htdocs`.
-
-### 3. Import the Database
-
-1. Open **phpMyAdmin**: http://localhost/phpmyadmin
-2. Click **Import** in the top menu
-3. Choose the file: `database/cybersecurity_learn_db.sql`
-4. Click **Go** to import
-
-This creates the `cybersecurity_learn_db` database with all tables and sample data.
-
-**Alternative (command line):**
-
-```bash
-C:\xampp\mysql\bin\mysql -u root < "database/cybersecurity_learn_db.sql"
-```
-
-### 4. Configure Database Connection
-
-Open `config/config.php` and verify these settings match your XAMPP setup:
-
-```php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'cybersecurity_learn_db');
-define('DB_USER', 'root');
-define('DB_PASS', '');  // Default XAMPP password is empty
-define('BASE_URL', '/CYBERSECURITY WEB');  // Must match your htdocs folder name
-```
-
-> **Important:** Update `BASE_URL` to match your actual folder name in `htdocs`. If your folder is named differently (e.g., `cybersafe`), change it to `'/cybersafe'`.
-
-### 5. Run the Website
-
-Open your browser and navigate to:
-
-```
-http://localhost/CYBERSECURITY%20WEB/
-```
-
-Or if you renamed the folder:
-
-```
-http://localhost/your-folder-name/
-```
-
-## Demo Accounts
-
-| Role  | Username    | Password   |
-|-------|-------------|------------|
-| Admin | `admin`     | `admin123` |
-| User  | `demo_user` | `user123`  |
-
-The admin account can access the Admin Panel to manage content and view analytics.
+| Technology | Purpose |
+|------------|---------|
+| HTML5 | Page structure and semantic markup |
+| CSS3 | Custom dark/light theme styling |
+| JavaScript | Quizzes, password checker, dynamic content |
+| Bootstrap 5 | Responsive grid and layout |
+| GitHub Pages | Static site hosting |
 
 ## Project Structure
 
 ```
 CYBERSECURITY WEB/
-├── index.php              # Home page
-├── learn.php              # Learning modules list
-├── module.php             # Single module view
-├── quiz.php               # Quizzes and password checker
-├── tips.php               # Quick tips cheat sheet
-├── resources.php          # Tools and glossary
-├── about.php              # About page
-├── dashboard.php          # User progress dashboard
-├── auth/
-│   ├── login.php
-│   ├── register.php
-│   └── logout.php
-├── admin/
-│   ├── index.php          # Admin dashboard & analytics
-│   ├── modules.php        # CRUD for modules
-│   ├── tips.php           # CRUD for tips
-│   └── questions.php      # CRUD for quiz questions
-├── api/
-│   └── save-quiz.php      # Save quiz results (JSON API)
+├── index.html             # Home page
+├── learn.html             # Learning modules list
+├── module.html            # Single module view (?id=1)
+├── quiz.html              # Quizzes and password checker
+├── tips.html              # Quick tips cheat sheet
+├── resources.html         # Tools and glossary
+├── about.html             # About page
 ├── assets/
-│   ├── css/style.css
-│   └── js/                # main.js, quiz.js, password-checker.js
-├── config/
-│   ├── config.php         # Active config (gitignored)
-│   └── config.example.php # Template for setup
-├── database/
-│   └── cybersecurity_learn_db.sql
-└── includes/
-    ├── db.php             # PDO connection & helpers
-    ├── auth.php           # Authentication functions
-    ├── header.php
-    └── footer.php
+│   ├── css/style.css      # Custom theme styles
+│   └── js/
+│       ├── data.js        # All site content (modules, tips, quizzes)
+│       ├── icons.js       # SVG icon helpers
+│       ├── layout.js      # Shared header/footer
+│       ├── pages.js       # Page-specific rendering
+│       ├── main.js        # Navigation, theme toggle, animations
+│       ├── quiz.js        # Interactive quiz engine
+│       ├── password-checker.js
+│       └── password-toggle.js
+└── .nojekyll              # GitHub Pages config
 ```
 
-## Troubleshooting
+## Local Development
 
-| Problem                        | Solution                                                                                  |
-|--------------------------------|-------------------------------------------------------------------------------------------|
-| Database connection failed     | Ensure MySQL is running in XAMPP and `config/config.php` credentials are correct          |
-| CSS/JS not loading             | Check `BASE_URL` in `config/config.php` matches your folder name                          |
-| Blank pages / PHP errors       | Enable error display in `php.ini`: `display_errors = On`                                  |
-| 404 on pages                   | Verify the project is inside `C:\xampp\htdocs\` and Apache is running                    |
+1. Clone the repository
+2. Open any `.html` file in VS Code
+3. Use the **Live Server** extension to preview (recommended)
+4. Or open `index.html` directly in a browser
+
+No database or server setup required.
+
+## Deploy to GitHub Pages
+
+1. Push this project to a GitHub repository
+2. Go to **Settings → Pages**
+3. Under **Source**, select **Deploy from branch**
+4. Choose the `main` branch and `/ (root)` folder
+5. Click **Save**
+6. Your site will be live at `https://yourusername.github.io/repo-name/`
+
+## Quiz Progress
+
+Quiz results are saved in your browser's `localStorage` — no account or server needed. Progress stays on your device only.
 
 ## For Academic Submission
 
-- Database export: `database/cybersecurity_learn_db.sql`
-- Code comments explain key security practices throughout PHP files
-- This README documents full setup and project structure
+- **Course:** IT 122 — Information Assurance Security 2
+- **Institution:** Bicol University Polangui
+- **Authors:** Enrick Guiller Relos | Danielle Sapico
+- **Year:** 2026
 
 ## License
 
