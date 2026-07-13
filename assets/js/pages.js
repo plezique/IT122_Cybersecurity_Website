@@ -143,13 +143,41 @@ function initResourcesPage() {
     const glossaryEl = document.getElementById('glossary-container');
     if (!toolsEl || !glossaryEl) return;
 
+    const categoryOrder = [
+        'Password Managers',
+        'VPN Services',
+        'Antivirus Tools',
+        'Browser Privacy & Security Extensions',
+        'Two-Factor Authentication (2FA) Apps',
+        'Data Breach & Security Check Tools',
+        'Learning & News Sources',
+        'Mobile Security Tools',
+    ];
+
+    const pricingLabels = {
+        free: 'Free',
+        paid: 'Paid',
+        freemium: 'Freemium',
+        'built-in': 'Built-in',
+    };
+
     const byCategory = {};
     CYBERSAFE_DATA.tools.forEach(tool => {
         if (!byCategory[tool.category]) byCategory[tool.category] = [];
         byCategory[tool.category].push(tool);
     });
 
-    toolsEl.innerHTML = Object.entries(byCategory).map(([category, tools]) => `
+    const sortedCategories = Object.keys(byCategory).sort((a, b) => {
+        const posA = categoryOrder.indexOf(a);
+        const posB = categoryOrder.indexOf(b);
+        const orderA = posA === -1 ? Number.MAX_SAFE_INTEGER : posA;
+        const orderB = posB === -1 ? Number.MAX_SAFE_INTEGER : posB;
+        return orderA - orderB;
+    });
+
+    toolsEl.innerHTML = sortedCategories.map(category => {
+        const tools = byCategory[category];
+        return `
         <h3 class="mt-3 mb-2" style="color: var(--color-text); font-family: var(--font-heading);">${escapeHtml(category)}</h3>
         <div class="card-grid mb-3">
             ${tools.map(tool => `
@@ -157,13 +185,17 @@ function initResourcesPage() {
                     <div class="resource-card">
                         <span class="resource-icon" aria-hidden="true">${getIcon('tool')}</span>
                         <div>
-                            <h3>${escapeHtml(tool.name)}</h3>
+                            <div class="resource-card-header">
+                                <h3>${escapeHtml(tool.name)}</h3>
+                                ${tool.pricing && pricingLabels[tool.pricing] ? `<span class="resource-pricing-tag">${escapeHtml(pricingLabels[tool.pricing])}</span>` : ''}
+                            </div>
                             <p>${escapeHtml(tool.description)}</p>
                             ${tool.url ? `<a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener noreferrer">Visit website &rarr;</a>` : ''}
                         </div>
                     </div>
                 </div>`).join('')}
-        </div>`).join('');
+        </div>`;
+    }).join('');
 
     glossaryEl.innerHTML = CYBERSAFE_DATA.glossary.map(term => `
         <div class="glossary-item">

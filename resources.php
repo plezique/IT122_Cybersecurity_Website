@@ -15,18 +15,44 @@ $glossaryStmt = $db->prepare('SELECT * FROM resources WHERE resource_type = ? OR
 $glossaryStmt->execute(['glossary']);
 $glossary = $glossaryStmt->fetchAll();
 
+$categoryOrder = [
+    'Password Managers',
+    'VPN Services',
+    'Antivirus Tools',
+    'Browser Privacy & Security Extensions',
+    'Two-Factor Authentication (2FA) Apps',
+    'Data Breach & Security Check Tools',
+    'Learning & News Sources',
+    'Mobile Security Tools',
+];
+
+$pricingLabels = [
+    'free' => 'Free',
+    'paid' => 'Paid',
+    'freemium' => 'Freemium',
+    'built-in' => 'Built-in',
+];
+
 // Group tools by category
 $toolsByCategory = [];
 foreach ($tools as $tool) {
     $toolsByCategory[$tool['category']][] = $tool;
 }
+
+uksort($toolsByCategory, function ($a, $b) use ($categoryOrder) {
+    $posA = array_search($a, $categoryOrder, true);
+    $posB = array_search($b, $categoryOrder, true);
+    $posA = $posA === false ? PHP_INT_MAX : $posA;
+    $posB = $posB === false ? PHP_INT_MAX : $posB;
+    return $posA <=> $posB;
+});
 ?>
 
 <div class="page-header">
     <div class="container">
         <span class="data-tag">Resources</span>
         <h1 class="mt-2">Resources</h1>
-        <p>Trusted security tools and a glossary of key cybersecurity terms.</p>
+        <p>Trusted tools and references to help you put these lessons into practice.</p>
     </div>
 </div>
 
@@ -52,7 +78,12 @@ foreach ($tools as $tool) {
                 <div class="resource-card">
                     <span class="resource-icon" aria-hidden="true"><?= icon('tool') ?></span>
                     <div>
-                        <h3><?= e($tool['name']) ?></h3>
+                        <div class="resource-card-header">
+                            <h3><?= e($tool['name']) ?></h3>
+                            <?php if (!empty($tool['pricing']) && isset($pricingLabels[$tool['pricing']])): ?>
+                                <span class="resource-pricing-tag"><?= e($pricingLabels[$tool['pricing']]) ?></span>
+                            <?php endif; ?>
+                        </div>
                         <p><?= e($tool['description']) ?></p>
                         <?php if ($tool['url']): ?>
                             <a href="<?= e($tool['url']) ?>" target="_blank" rel="noopener noreferrer">Visit website &rarr;</a>

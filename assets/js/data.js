@@ -778,51 +778,171 @@ const CYBERSAFE_DATA = {
   tools: [
     {
       name: "Bitwarden",
-      description: "Free, open-source password manager with cross-device sync and strong encryption.",
+      description: "Free, open-source password manager to securely store and generate passwords across all your devices.",
       url: "https://bitwarden.com",
-      category: "Password Management"
+      category: "Password Managers",
+      pricing: "free"
     },
     {
       name: "1Password",
-      description: "Premium password manager with family and business plans and excellent usability.",
+      description: "Polished paid password manager with strong family and team sharing features.",
       url: "https://1password.com",
-      category: "Password Management"
+      category: "Password Managers",
+      pricing: "paid"
     },
     {
-      name: "NordVPN",
-      description: "Popular VPN service that encrypts your internet connection on public Wi-Fi.",
-      url: "https://nordvpn.com",
-      category: "Network Security"
+      name: "KeePassXC",
+      description: "Free, offline password vault that keeps your credentials on your own device for maximum privacy.",
+      url: "https://keepassxc.org",
+      category: "Password Managers",
+      pricing: "free"
+    },
+    {
+      name: "ProtonVPN",
+      description: "VPN with a free tier, based in Switzerland under strong privacy laws.",
+      url: "https://protonvpn.com",
+      category: "VPN Services",
+      pricing: "freemium"
+    },
+    {
+      name: "Mullvad VPN",
+      description: "Privacy-first VPN that does not require an email address to sign up.",
+      url: "https://mullvad.net",
+      category: "VPN Services",
+      pricing: "paid"
+    },
+    {
+      name: "Windscribe",
+      description: "VPN with a generous free tier, suitable for casual browsing on public Wi-Fi.",
+      url: "https://windscribe.com",
+      category: "VPN Services",
+      pricing: "freemium"
     },
     {
       name: "Malwarebytes",
-      description: "Antivirus and anti-malware tool that detects and removes threats.",
-      url: "https://malwarebytes.com",
-      category: "Antivirus"
+      description: "Anti-malware tool that catches threats traditional antivirus software often misses.",
+      url: "https://www.malwarebytes.com",
+      category: "Antivirus Tools",
+      pricing: "freemium"
     },
     {
       name: "Windows Defender",
-      description: "Built-in antivirus for Windows — enable and keep it updated.",
+      description: "Built-in antivirus for Windows — solid baseline protection with no extra install needed.",
       url: "https://www.microsoft.com/en-us/windows/comprehensive-security",
-      category: "Antivirus"
+      category: "Antivirus Tools",
+      pricing: "built-in"
     },
     {
-      name: "Have I Been Pwned",
-      description: "Check if your email has appeared in known data breaches.",
-      url: "https://haveibeenpwned.com",
-      category: "Account Security"
-    },
-    {
-      name: "Google Authenticator",
-      description: "Free app for generating MFA codes on your phone.",
-      url: "https://googleauthenticator.google.com",
-      category: "Authentication"
+      name: "Bitdefender",
+      description: "Well-reviewed paid antivirus with lightweight system impact and strong detection rates.",
+      url: "https://www.bitdefender.com",
+      category: "Antivirus Tools",
+      pricing: "paid"
     },
     {
       name: "uBlock Origin",
-      description: "Browser extension that blocks ads and malicious trackers.",
+      description: "Browser extension that blocks ads and trackers, reducing exposure to malicious ads.",
       url: "https://ublockorigin.com",
-      category: "Browsing"
+      category: "Browser Privacy & Security Extensions",
+      pricing: "free"
+    },
+    {
+      name: "Browser HTTPS Enforcement",
+      description: "Modern browsers upgrade connections to HTTPS by default — look for the padlock icon in the address bar.",
+      url: "https://support.google.com/chrome/answer/95617",
+      category: "Browser Privacy & Security Extensions",
+      pricing: "built-in"
+    },
+    {
+      name: "Privacy Badger",
+      description: "EFF browser extension that automatically blocks invisible trackers as you browse.",
+      url: "https://privacybadger.org",
+      category: "Browser Privacy & Security Extensions",
+      pricing: "free"
+    },
+    {
+      name: "Google Authenticator",
+      description: "Free mobile app that generates time-based codes for two-factor authentication.",
+      url: "https://googleauthenticator.google.com",
+      category: "Two-Factor Authentication (2FA) Apps",
+      pricing: "free"
+    },
+    {
+      name: "Microsoft Authenticator",
+      description: "Free authenticator app with push notifications for quick, passwordless sign-in.",
+      url: "https://www.microsoft.com/en-us/security/mobile-authenticator-app",
+      category: "Two-Factor Authentication (2FA) Apps",
+      pricing: "free"
+    },
+    {
+      name: "Authy",
+      description: "Authenticator app with multi-device sync, useful when switching phones.",
+      url: "https://authy.com",
+      category: "Two-Factor Authentication (2FA) Apps",
+      pricing: "free"
+    },
+    {
+      name: "Have I Been Pwned",
+      description: "Check if your email or password has appeared in a known data breach.",
+      url: "https://haveibeenpwned.com",
+      category: "Data Breach & Security Check Tools",
+      pricing: "free"
+    },
+    {
+      name: "Google Password Checkup",
+      description: "Built into Chrome and Google accounts — flags reused, weak, or breached saved passwords.",
+      url: "https://passwords.google.com",
+      category: "Data Breach & Security Check Tools",
+      pricing: "built-in"
+    },
+    {
+      name: "Krebs on Security",
+      description: "Independent cybersecurity journalism blog covering breaches, scams, and threat trends.",
+      url: "https://krebsonsecurity.com",
+      category: "Learning & News Sources",
+      pricing: "free"
+    },
+    {
+      name: "National Cybersecurity Alliance",
+      description: "Consumer-focused awareness resources and practical online safety guides.",
+      url: "https://staysafeonline.org",
+      category: "Learning & News Sources",
+      pricing: "free"
+    },
+    {
+      name: "CISA",
+      description: "U.S. government cybersecurity agency with alerts, tips, and incident reporting resources.",
+      url: "https://www.cisa.gov",
+      category: "Learning & News Sources",
+      pricing: "free"
+    },
+    {
+      name: "OWASP",
+      description: "Open Web Application Security Project — a technical reference for web application security.",
+      url: "https://owasp.org",
+      category: "Learning & News Sources",
+      pricing: "free"
+    },
+    {
+      name: "Find My Device",
+      description: "Built-in Android tool to locate, lock, or erase a lost or stolen phone remotely.",
+      url: "https://www.google.com/android/find",
+      category: "Mobile Security Tools",
+      pricing: "built-in"
+    },
+    {
+      name: "Find My iPhone",
+      description: "Built-in iOS feature to locate, lock, or erase a lost or stolen Apple device.",
+      url: "https://www.apple.com/icloud/find-my/",
+      category: "Mobile Security Tools",
+      pricing: "built-in"
+    },
+    {
+      name: "Signal",
+      description: "Encrypted messaging app that protects the content of your calls and texts.",
+      url: "https://signal.org",
+      category: "Mobile Security Tools",
+      pricing: "free"
     },
   ],
   glossary: [
@@ -842,24 +962,14 @@ const CYBERSAFE_DATA = {
       category: "Threats"
     },
     {
-      name: "MFA / 2FA",
-      description: "Multi-Factor Authentication — requires two or more verification methods to log in.",
-      category: "Authentication"
-    },
-    {
-      name: "VPN",
-      description: "Virtual Private Network — encrypts your internet traffic and hides your IP address.",
+      name: "Firewall",
+      description: "A security system that monitors and controls incoming and outgoing network traffic.",
       category: "Network"
     },
     {
-      name: "CIA Triad",
-      description: "Core security model: Confidentiality, Integrity, and Availability of information.",
-      category: "Fundamentals"
-    },
-    {
-      name: "Social Engineering",
-      description: "Manipulating people into revealing confidential information or performing actions that compromise security.",
-      category: "Threats"
+      name: "VPN",
+      description: "Virtual Private Network — encrypts your internet traffic and hides your IP address from snoopers.",
+      category: "Network"
     },
     {
       name: "Encryption",
@@ -867,14 +977,49 @@ const CYBERSAFE_DATA = {
       category: "Fundamentals"
     },
     {
-      name: "Zero-Day",
-      description: "A software vulnerability unknown to the vendor, with no patch available yet.",
+      name: "Two-Factor Authentication (2FA)",
+      description: "A login method that requires a second verification step beyond your password, such as a code from your phone.",
+      category: "Authentication"
+    },
+    {
+      name: "Social Engineering",
+      description: "Manipulating people into revealing confidential information or performing actions that compromise security.",
       category: "Threats"
     },
     {
-      name: "Firewall",
-      description: "A security system that monitors and controls incoming and outgoing network traffic.",
-      category: "Network"
+      name: "Zero-Day Vulnerability",
+      description: "A software flaw unknown to the vendor with no security patch available yet.",
+      category: "Threats"
+    },
+    {
+      name: "Brute Force Attack",
+      description: "An attack that tries every possible password combination until the correct one is found.",
+      category: "Threats"
+    },
+    {
+      name: "Man-in-the-Middle Attack",
+      description: "An attack where someone secretly intercepts communication between two parties to steal or alter data.",
+      category: "Threats"
+    },
+    {
+      name: "Public Key / Private Key",
+      description: "A cryptographic key pair used in encryption — the public key encrypts data, and only the matching private key can decrypt it.",
+      category: "Fundamentals"
+    },
+    {
+      name: "Spoofing",
+      description: "Disguising communication to appear as if it comes from a trusted source, such as a fake email address or caller ID.",
+      category: "Threats"
+    },
+    {
+      name: "DDoS (Distributed Denial of Service)",
+      description: "An attack that floods a website or server with traffic from many sources, making it unavailable to legitimate users.",
+      category: "Threats"
+    },
+    {
+      name: "CIA Triad",
+      description: "Core security model: Confidentiality, Integrity, and Availability of information.",
+      category: "Fundamentals"
     },
   ]
 };
